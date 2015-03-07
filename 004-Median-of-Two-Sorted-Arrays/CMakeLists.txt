@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 2.6)
+project(media-of-two-sorted-array)
+enable_testing()
+find_package (Threads)
+include_directories(${PROJECT_SOURCE_DIR}/../include)
+link_directories(${PROJECT_SOURCE_DIR}/../lib/gtest)
+add_executable(main main.cpp)
+target_link_libraries(main gtest ${CMAKE_THREAD_LIBS_INIT})
+add_test(NAME test1 COMMAND test1)
+
