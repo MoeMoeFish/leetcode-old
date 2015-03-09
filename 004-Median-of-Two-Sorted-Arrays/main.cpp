@@ -11,6 +11,11 @@ public:
             return findMedianInSingleArray(B, n);
         } else if (m > 0 && n <= 0) {
             return findMedianInSingleArray(A, m);
+        } else if ( n = 1 ) {
+            return findMedianForOneOther(A, m, B[0]);
+        } else if ( m = 1 ) {
+            return findMedianForOneOther(B, n, A[0]);
+        }
         } else {
             return findMedianSortdArraysRecursively(A, m, B, n, m + n, 0, m);
         }
@@ -22,6 +27,14 @@ public:
         
 
         return 0.0;
+    }
+
+    double findMedianForOneOther(int A[], int m, int other) {
+       int middleA = m / 2; 
+
+       if (m % 2 == 0) {
+           
+       }
     }
 
     double findMedianInSingleArray(int A[], int m) {
