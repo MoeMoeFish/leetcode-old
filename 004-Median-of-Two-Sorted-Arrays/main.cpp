@@ -11,11 +11,10 @@ public:
             return findMedianInSingleArray(B, n);
         } else if (m > 0 && n <= 0) {
             return findMedianInSingleArray(A, m);
-        } else if ( n = 1 ) {
+        } else if ( n == 1 ) {
             return findMedianForOneOther(A, m, B[0]);
-        } else if ( m = 1 ) {
+        } else if ( m == 1 ) {
             return findMedianForOneOther(B, n, A[0]);
-        }
         } else {
             return findMedianSortdArraysRecursively(A, m, B, n, m + n, 0, m);
         }
@@ -26,14 +25,30 @@ public:
         int posB = count / 2 - midA;
         
 
+
         return 0.0;
     }
 
     double findMedianForOneOther(int A[], int m, int other) {
+        if ( m  == 1) {
+            return static_cast<double>(A[0] + other) / 2;
+        }
+
        int middleA = m / 2; 
 
        if (m % 2 == 0) {
-           
+           if (other < A[middleA] ) {
+               return other > A[middleA - 1] ? other : A[middleA - 1];
+           } else {
+               return A[middleA];
+           }
+       } else {
+           int smallOne = other;
+           if (other < A[middleA]) {
+               smallOne  = other > A[middleA - 1] ? other : A[middleA - 1]; 
+           } 
+
+           return static_cast<double>(smallOne + A[middleA]) / 2;
        }
     }
 
@@ -58,7 +73,7 @@ TEST(MedianToArray, Test1) {
         int lengthB = 0;
         int* a = nullptr;
         int* b = nullptr;
-        //sl->findMedianSortedArrays();
+
         Solution sl1;
         EXPECT_EQ(0.0, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
     }
@@ -68,7 +83,7 @@ TEST(MedianToArray, Test1) {
         const int lengthB = 0;
         int* a = new int[lengthA] { 3 };
         int* b = nullptr;
-        //sl->findMedianSortedArrays();
+
         Solution sl1;
         EXPECT_EQ(3, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
         delete[] a;
@@ -79,7 +94,7 @@ TEST(MedianToArray, Test1) {
         const int lengthB = 0;
         int* a = new int[lengthA] { 1, 2, 6, 8 }; 
         int* b = nullptr;
-        //sl->findMedianSortedArrays();
+
         Solution sl1;
         EXPECT_EQ(4, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
         delete[] a;
@@ -90,7 +105,7 @@ TEST(MedianToArray, Test1) {
         const int lengthB = 1;
         int* b = new int[lengthB] { 3 };
         int* a = nullptr;
-        //sl->findMedianSortedArrays();
+
         Solution sl1;
         EXPECT_EQ(3, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
         delete[] b;
@@ -101,7 +116,7 @@ TEST(MedianToArray, Test1) {
         const int lengthB = 4;
         int* b = new int[lengthB] { 1, 2, 6, 8 }; 
         int* a = nullptr;
-        //sl->findMedianSortedArrays();
+
         Solution sl1;
         EXPECT_EQ(4, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
         delete[] b;
@@ -113,9 +128,57 @@ TEST(MedianToArray, Test1) {
         int* a = new int[lengthA] { 1, 10, 100 };
         int* b = new int[lengthB] { 101, 10000 }; 
 
-        //sl->findMedianSortedArrays();
         Solution sl1;
-        EXPECT_EQ(100, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
+        //EXPECT_EQ(100, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
+        delete[] a;
+        delete[] b;
+    }
+
+    { 
+        const int lengthA = 1;
+        const int lengthB = 2;
+        int* a = new int[lengthA] { 2 };
+        int* b = new int[lengthB] { 1, 3 }; 
+
+        Solution sl1;
+        EXPECT_EQ(2, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
+        delete[] a;
+        delete[] b;
+    }
+
+    { 
+        const int lengthA = 2;
+        const int lengthB = 1;
+        int* a = new int[lengthA] { 1, 3};
+        int* b = new int[lengthB] { 2 }; 
+
+        Solution sl1;
+        EXPECT_EQ(2, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
+        delete[] a;
+        delete[] b;
+    }
+
+    { 
+        const int lengthA = 1;
+        const int lengthB = 4;
+        int* a = new int[lengthA] { 2 };
+        int* b = new int[lengthB] { 1, 3, 4, 5 }; 
+
+        Solution sl1;
+        EXPECT_EQ(3, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
+        delete[] a;
+        delete[] b;
+    }
+
+    { 
+        const int lengthA = 1;
+        const int lengthB = 3;
+        int* a = new int[lengthA] { 1 };
+        int* b = new int[lengthB] { 2, 3, 4 }; 
+
+        Solution sl1;
+        double expect = static_cast<double>( 2 + 3 ) / 2;
+        EXPECT_EQ(expect, sl1.findMedianSortedArrays(a, lengthA, b, lengthB));
         delete[] a;
         delete[] b;
     }
