@@ -23,8 +23,16 @@ public:
     double findMedianSortdArraysRecursively(int A[], int m,  int B[], int n, int count, int left, int right) {
         int midA = (left + right) / 2;
         int posB = count / 2 - midA;
-        
 
+        if (posB <= 0 && A[midA] < B[posB]) {
+            findMedianSortdArraysRecursively( A, m, B, n, count, left, midA );
+        } else {
+
+        }
+        
+        if ( B[posB - 1] <= A[midA] && A[midA] <= B[posB] ) {
+            // OK
+        }
 
         return 0.0;
     }
