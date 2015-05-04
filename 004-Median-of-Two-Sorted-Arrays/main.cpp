@@ -11,10 +11,6 @@ public:
             return findMedianInSingleArray(B, n);
         } else if (m > 0 && n <= 0) {
             return findMedianInSingleArray(A, m);
-        } else if ( n == 1 ) {
-            return findMedianForOneOther(A, m, B[0]);
-        } else if ( m == 1 ) {
-            return findMedianForOneOther(B, n, A[0]);
         } else {
             return findMedianSortdArraysRecursively(A, m, B, n, m + n, 0, m);
         }
@@ -23,15 +19,17 @@ public:
     double findMedianSortdArraysRecursively(int A[], int m,  int B[], int n, int count, int left, int right) {
         int midA = (left + right) / 2;
         int posB = count / 2 - midA;
-
-        if (posB <= 0 && A[midA] < B[posB]) {
-            findMedianSortdArraysRecursively( A, m, B, n, count, left, midA );
-        } else {
-
-        }
         
-        if ( B[posB - 1] <= A[midA] && A[midA] <= B[posB] ) {
-            // OK
+        if (left >= right) {
+            return findMedianSortdArraysRecursively(B, n, A, m, count, 0, n - 1);
+        }
+
+        if (A[midA] <= B[posB] && A[midA] >= B[posB - 1]) {
+            return A[midA];
+        } else if (A[mindA] > B[posB]) {
+            return findMedianSortdArraysRecursively(A, m, B, n, count, left, midA - 1);
+        } else {
+            return findMedianSortdArraysRecursively(A, m, B, n, count, midA + 1, right);
         }
 
         return 0.0;
