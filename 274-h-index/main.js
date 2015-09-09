@@ -26,7 +26,7 @@ var hIndex = function( citations ) {
     for ( var i = Number(length); i >= 0; i-- ) {
         total += buffer[i];
         
-        if ( buffer[i] > 0 && total >= i ) {
+        if ( total >= i ) {
             return i;
         }
     }
