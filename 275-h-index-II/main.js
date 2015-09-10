@@ -12,7 +12,8 @@ var hIndex = function( citations ) {
 
 function hIndexInner( citations, begin, end ) {
 	var middle = Math.floor( (begin + end) / 2 );
-	if ( begin === end ) {
+	
+	if ( begin >= end ) {
 		middle = begin;
 	}
 	
@@ -20,7 +21,7 @@ function hIndexInner( citations, begin, end ) {
 	
 	var cValue = citations[ middle ];
 	
-	if ( begin === end ) {
+	if ( begin >= end ) {
 		return indexNum > cValue ? indexNum - 1 : indexNum;
 	}
 	
@@ -29,11 +30,13 @@ function hIndexInner( citations, begin, end ) {
 	}
 	
 	if ( indexNum > cValue ) {
-		return hIndexInner( citations, middle, end - 1 );
+		return hIndexInner( citations, middle + 1, end);
 	} else {
-		return hIndexInner( citations, begin + 1, middle );
+		return hIndexInner( citations, begin, middle - 1);
 	}
 }
+
+
 
 
 module.exports = hIndex;
