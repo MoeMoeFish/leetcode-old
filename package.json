@@ -1,0 +1,27 @@
+{
+  "name": "leetcode-exercise",
+  "version": "1.0.0",
+  "description": "leetcode exercise",
+  "main": "index.js",
+  "dependencies": {
+    "tape": "^4.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FishThirteen/leetcode.git"
+  },
+  "keywords": [
+    "leetcode",
+    "algorithm"
+  ],
+  "author": "fish",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FishThirteen/leetcode/issues"
+  },
+  "homepage": "https://github.com/FishThirteen/leetcode#readme"
+}
