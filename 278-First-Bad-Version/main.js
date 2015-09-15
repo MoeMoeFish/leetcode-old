@@ -36,10 +36,10 @@ var solution = function(isBadVersion) {
         }
         
         if ( isMiddleBad ) {
-            return begin;    
+            return middle;    
         }
         
-        return begin + 1;
+        return middle + 1;
     };
 };
 
