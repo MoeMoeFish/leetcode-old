@@ -21,11 +21,12 @@ var solution = function(isBadVersion) {
     return function(n) {
         var begin = 1;
         var end = n;
-        var middle = Math.floor( 1 + n );
-        
-        while (begin < end) {
-            middle = Math.floor( begin + end );
-            if ( isBadVersion( middle ) ) {
+        var middle = Math.floor( (1 + n) / 2 );
+        var isMiddleBad = isBadVersion( middle );
+        while (begin <= end) {
+            middle = Math.floor( ( begin + end ) / 2 );
+            isMiddleBad = isBadVersion( middle );
+            if ( isMiddleBad ) {
                 end = middle - 1;
                 continue;
             } else {
@@ -34,11 +35,11 @@ var solution = function(isBadVersion) {
             }
         }
         
-        if ( isBadVersion( middle )) {
-            return middle;    
+        if ( isMiddleBad ) {
+            return begin;    
         }
         
-        return middle + 1;
+        return begin + 1;
     };
 };
 
