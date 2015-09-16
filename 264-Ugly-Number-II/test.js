@@ -8,9 +8,9 @@ test( 'Ugly Number II', function( t ) {
 	t.equal(nthUglyNumber(4), 4, '4');
 	t.equal(nthUglyNumber(5), 5, '5');
 	t.equal(nthUglyNumber(6), 6, '6');
-	t.equal(nthUglyNumber(7), 8, '8');
-	t.equal(nthUglyNumber(8), 9, '9');
-	t.equal(nthUglyNumber(9), 10, '10');
-	t.equal(nthUglyNumber(10), 12, '11');
+	t.equal(nthUglyNumber(7), 8, '7');
+	t.equal(nthUglyNumber(8), 9, '8');
+	t.equal(nthUglyNumber(9), 10, '9');
+	t.equal(nthUglyNumber(10), 12, '10');
 	t.end();
 } );
