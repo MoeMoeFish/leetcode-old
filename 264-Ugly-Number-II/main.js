@@ -4,22 +4,26 @@
  */
 var nthUglyNumber = function(n) {
 	buffer = [];
+	numb = 0;
 	var num = 0;
 	var i = 0;
+
 	while (num < n) {
 		i++;
-		if ( isUgly(i) ) {
+		var result = isUgly(i);
+		buffer[ i ] = result;
+		if ( result ) {
 			num++;
 		}
-		
 	}
 	
+	console.log(numb);
 	return i;
 };
 
 var isUgly = function(num) {
+	numb++;
 	if (buffer[ num ] !== undefined) {
-		console.log( 'check buffer' );
 		return buffer[num];
 	}
 	
@@ -51,10 +55,10 @@ var isUgly = function(num) {
 		result = false;
 	}
 	
-	buffer[num] = result; 
 	return result
 };
 
 var buffer = [];
+var numb = 0;
 
 module.exports = nthUglyNumber;
