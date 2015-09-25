@@ -3,62 +3,43 @@
  * @return {number}
  */
 var nthUglyNumber = function(n) {
-	buffer = [];
-	numb = 0;
-	var num = 0;
-	var i = 0;
-
-	while (num < n) {
-		i++;
-		var result = isUgly(i);
-		buffer[ i ] = result;
-		if ( result ) {
-			num++;
+	var num = 1;
+	var cali = 1;
+	
+	while ( num < n ) {
+		var i = cali;
+		var min = NaN;
+		
+		while ( i <= num ) {
+			var isEnd = true;
+			var result = buffer[i] * 2;
+			if ( !dict[result] ) {
+				isEnd = false;
+				
+				if ( isMin( min, result ) ) {
+					min = result;
+				}
+			}
+			
+			if ( isEnd ) {
+				cali++;	
+			}
+			
+			i++;
 		}
+		
+		buffer.push( min );
+		num++;
 	}
-	
-	console.log(numb);
-	return i;
-};
+}
 
-var isUgly = function(num) {
-	numb++;
-	if (buffer[ num ] !== undefined) {
-		return buffer[num];
-	}
-	
-	if ( num === 0 ) {
-		return false;
-	} 
-	
-	var checked = false;
-    if ( num % 2 === 0 ) {
-		num = num / 2;
-		checked = true;
-	} else if ( num % 3 === 0 ) {
-		num = num / 3;
-		checked = true;
-	} else if ( num % 5 === 0 ) {
-		num = num / 5;
-		checked = true;
-	}
-	
-	
-	if ( num === 1 ) {
+var isMin = function(min, compare) {
+	if ( isNaN(min) ) {
 		return true;
-	}
-	
-	var result = false;
-	if ( checked ) {
-		result = isUgly( num );
 	} else {
-		result = false;
+		return compare < min;
 	}
-	
-	return result
-};
+}
 
-var buffer = [];
-var numb = 0;
-
-module.exports = nthUglyNumber;
+var dict = { 1 : true }
+var buffer = [ 1 ];

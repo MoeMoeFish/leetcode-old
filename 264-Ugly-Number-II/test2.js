@@ -1,2 +1,2 @@
 var nthUglyNumber = require( './main' );
-nthUglyNumber(process.argv[2]);
+console.log(nthUglyNumber(process.argv[2]));
