@@ -6,40 +6,58 @@ var nthUglyNumber = function(n) {
 	var num = 1;
 	var cali = 1;
 	
+	var dict = { 1 : true }
+	var buffer = [ 0, 1 ];
+	
 	while ( num < n ) {
 		var i = cali;
 		var min = NaN;
 		
 		while ( i <= num ) {
-			var isEnd = true;
 			var result = buffer[i] * 2;
 			if ( !dict[result] ) {
-				isEnd = false;
-				
-				if ( isMin( min, result ) ) {
+				if ( less( result, min ) ) {
+					min = result;
+				} else {
+					break;
+				}
+			}
+			
+			result = buffer[i] * 3;
+			if ( !dict[result] ) {
+				if ( less( result, min ) ) {
 					min = result;
 				}
 			}
 			
-			if ( isEnd ) {
-				cali++;	
+			result = buffer[i] * 5;
+			if ( !dict[result] ) {
+				if ( less( result, min ) ) {
+					min = result;
+					if (cali < i) {
+						cali = i;
+					}
+				}
 			}
-			
 			i++;
 		}
 		
+		dict[min] = true;
 		buffer.push( min );
 		num++;
 	}
+	
+	return buffer[num];
 }
 
-var isMin = function(min, compare) {
-	if ( isNaN(min) ) {
+var less = function( left, right ) {
+	if ( isNaN( right ) ) {
 		return true;
 	} else {
-		return compare < min;
+		return left < right;
 	}
 }
 
-var dict = { 1 : true }
-var buffer = [ 1 ];
+module.exports = nthUglyNumber;
+
+
