@@ -13,5 +13,6 @@ test( 'Ugly Number II', function( t ) {
 	t.equal(nthUglyNumber(9), 10, '9');
 	t.equal(nthUglyNumber(10), 12, '10');
 	t.equal(nthUglyNumber(355), 177147, '355');
+	t.equal(nthUglyNumber(1045), 68343750, '1045');
 	t.end();
 } );

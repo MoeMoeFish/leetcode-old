@@ -3,61 +3,58 @@
  * @return {number}
  */
 var nthUglyNumber = function(n) {
-	var num = 1;
-	var cali = 1;
+	var twoIndex = 1;
+	var threeIndex = 1;
+	var fiveIndex = 1;
 	
-	var dict = { 1 : true }
+	var twoCurr = 2;
+	var threeCurr = 3;
+	var fiveCurr = 5;
+	
+	var num = 1;	
 	var buffer = [ 0, 1 ];
 	
+	var minIndex = 2;
+	
 	while ( num < n ) {
-		var i = cali;
-		var min = NaN;
-		
-		while ( i <= num ) {
-			var result = buffer[i] * 2;
-			if ( !dict[result] ) {
-				if ( less( result, min ) ) {
-					min = result;
-				} else {
-					break;
-				}
+		if ( twoCurr <= threeCurr ) {
+			minIndex = 2;
+			if ( fiveCurr < twoCurr ) {
+				minIndex = 5;
 			}
-			
-			result = buffer[i] * 3;
-			if ( !dict[result] ) {
-				if ( less( result, min ) ) {
-					min = result;
-				}
+		} else {
+			minIndex = 3;
+			if ( fiveCurr < threeCurr ) {
+				minIndex = 5;
 			}
-			
-			result = buffer[i] * 5;
-			if ( !dict[result] ) {
-				if ( less( result, min ) ) {
-					min = result;
-					if (cali < i) {
-						cali = i;
-					}
-				}
-			}
-			i++;
 		}
 		
-		dict[min] = true;
-		buffer.push( min );
-		num++;
+		var current = 0;
+		if ( minIndex === 2 ) {
+			current = twoCurr;
+			buffer.push( twoCurr );
+			twoIndex++;
+			twoCurr = twoIndex * 2;
+		} else if ( minIndex === 3 ) {
+			current = threeCurr;
+			threeIndex++;
+			threeCurr = threeIndex * 3;
+		} else if ( minIndex === 5 ) {
+			current = fiveCurr;
+			fiveIndex++;
+			fiveCurr = fiveIndex * 5;
+		}
+		
+		if ( buffer.indexOf( current ) === -1 ) {
+			buffer.push( current );
+			num++;
+		}
 	}
+	
 	
 	return buffer[num];
 }
 
-var less = function( left, right ) {
-	if ( isNaN( right ) ) {
-		return true;
-	} else {
-		return left < right;
-	}
-}
 
 module.exports = nthUglyNumber;
-
 
