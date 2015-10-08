@@ -3,56 +3,53 @@
  * @return {number}
  */
 var nthUglyNumber = function(n) {
-	var twoIndex = 1;
-	var threeIndex = 1;
-	var fiveIndex = 1;
+	var twoIndex = 0;
+	var threeIndex = 0;
+	var fiveIndex = 0;
 	
-	var twoCurr = 2;
-	var threeCurr = 3;
-	var fiveCurr = 5;
+	var twoCurr = 1;
+	var threeCurr = 1;
+	var fiveCurr = 1;
 	
 	var num = 1;	
-	var buffer = [ 0, 1 ];
+	var buffer = [ 1 ];
 	
-	var minIndex = 2;
-	
-	while ( num < n ) {
-		if ( twoCurr <= threeCurr ) {
-			minIndex = 2;
-			if ( fiveCurr < twoCurr ) {
-				minIndex = 5;
-			}
-		} else {
-			minIndex = 3;
-			if ( fiveCurr < threeCurr ) {
-				minIndex = 5;
-			}
-		}
+	while( num < n ) {
+		twoCurr = 2 * buffer[twoIndex];
+		threeCurr = 3 * buffer[threeIndex];
+		fiveCurr = 5 * buffer[fiveIndex];
 		
-		var current = 0;
-		if ( minIndex === 2 ) {
-			current = twoCurr;
-			buffer.push( twoCurr );
+		var min = minNumber( twoCurr, threeCurr, fiveCurr );
+		
+		if ( min === twoCurr ) {
 			twoIndex++;
-			twoCurr = twoIndex * 2;
-		} else if ( minIndex === 3 ) {
-			current = threeCurr;
+		} else if ( min === threeCurr ) {
 			threeIndex++;
-			threeCurr = threeIndex * 3;
-		} else if ( minIndex === 5 ) {
-			current = fiveCurr;
+		} else if (min === fiveCurr ) {
 			fiveIndex++;
-			fiveCurr = fiveIndex * 5;
+		} else {
+			//throw 
 		}
 		
-		if ( buffer.indexOf( current ) === -1 ) {
-			buffer.push( current );
-			num++;
+		if ( buffer.indexOf( min ) !== -1 ) {
+			continue;
 		}
+		
+		buffer.push( min );
+		num++;
 	}
 	
+	return buffer.pop();
+}
+
+var minNumber = function( arg1, arg2, arg3 ) {
+	var min = arg1 <= arg2 ? arg1 : arg2;
 	
-	return buffer[num];
+	if ( arg3 < min ) {
+		min = arg3;
+	}
+	
+	return min;
 }
 
 
