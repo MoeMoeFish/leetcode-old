@@ -1,16 +1,29 @@
 const test = require('tape')
 const algo = require('./main.js')
-
-function ListNode(val) {
-  this.val = val
-  this.next = null
-}
+const ListNode = require('./node.js')
 
 test('add two numbers', function(t) {
+  let l243 = createdList([2, 4, 3])
+  let l564 = createdList([5, 6, 4])
+  t.deepEqual(toArray(algo(l243, l564)), [7,0,8])
 
   t.end()
 })
 
+function toArray(list) {
+  let arr = []
+  if (!list) {
+    return arr
+  }
+  
+  curr = list
+  while(curr) {
+    arr.push(curr.val)
+    curr = curr.next
+  }
+
+  return arr
+}
 
 function createdList(arr) {
   let list = null
@@ -27,7 +40,6 @@ function createdList(arr) {
       curr.next = node
       curr = node
     }
-
   }
 
   return list
