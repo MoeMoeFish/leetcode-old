@@ -20,7 +20,6 @@ var convert = function(s, numRows) {
         }
         
         while (true) {
-            console.log('j = ', j, ', hasMiddle = ', hasMiddle)
             if (j >= len) {
                 break
             }
@@ -28,7 +27,6 @@ var convert = function(s, numRows) {
 
             if (hasMiddle) {
                 let middle = j + (newColumns - i * 2)
-                console.log('middle = ', middle)
 
                 if (middle >= len) {
                     break
@@ -38,16 +36,10 @@ var convert = function(s, numRows) {
             }
 
             j += newColumns
-
         }
     }
 
     return ret
-
-
-
-
-
 }
 
 module.exports = convert
