@@ -1,0 +1,21 @@
+let tape = require('tape')
+let tapSpec = require('tap-spec')
+tape.createStream()
+  .pipe(tapSpec())
+  .pipe(process.stdout)
+
+let algo = require('./main')
+
+tape('Palindrome Number', (t) => {
+    t.true(algo(1))
+    t.true(algo(22))
+    t.true(algo(232))
+    t.true(algo(343))
+    t.true(algo(666))
+    t.true(algo(2332))
+    t.false(algo(987))
+    t.false(algo(10))
+    t.false(algo(100))
+    t.false(algo(1000))
+    t.end()
+})

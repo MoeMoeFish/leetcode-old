@@ -6,7 +6,9 @@
   "dependencies": {
     "tape": "^4.2.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "tap-spec": "^4.1.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
