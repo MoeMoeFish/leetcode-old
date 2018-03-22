@@ -1,0 +1,16 @@
+const tape = require('tape')
+const algo = require('./main')
+
+tape('Regular Expression Matching', function(t) {
+    t.false(algo('aa', 'a'))
+    t.true(algo('aa', 'aa'))
+    t.false(algo('aaa', 'aa'))
+    t.true(algo('aa', 'a*'))
+    t.true(algo('aa', '.*'))
+    t.true(algo('ab', '.*'))
+    t.true(algo('aab', 'c*a*b'))
+    t.true(algo('a', 'ab*'))
+    t.false(algo('ab', '.*c'))
+    t.false(algo('a', '.*..a*'))
+    t.end()
+})
