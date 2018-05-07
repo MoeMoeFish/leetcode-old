@@ -23,20 +23,24 @@ var threeSum = function(nums) {
 
         let j = i + 1, k = nums.length - 1
         while(j < k) {
-            if (target === 4) {
-                console.log(i, j, k, nums[i], nums[j], nums[k])    
-            }
-            if (nums[j] + nums[k] > target || (k < nums.length -1 && nums[k] === nums[k + 1])) {
+            console.log('#', i, j, k, nums[i], nums[j], nums[k])
+            while (k < nums.length - 1 && nums[k] === nums[k + 1]) {
                 k--
-            } else if (nums[j] + nums[k] < target || (j > i + 1 && nums[j] === nums[j - 1])) {
+            }
+            while (j > i + 1 && nums[j] === nums[j - 1]) {
+                j++
+            }
+            if (nums[j] + nums[k] > target) {
+                k--
+            } else if (nums[j] + nums[k] < target) {
                 j++
             } else {
+                console.log('@', i, j, k, nums[i], nums[j], nums[k])
                 rv.push([nums[i], nums[j], nums[k]])
                 j++
                 k--
             }
 
-            
         }
     }
 
