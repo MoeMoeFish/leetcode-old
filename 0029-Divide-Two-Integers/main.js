@@ -4,6 +4,30 @@
  * @return {number}
  */
 var divide = function(dividend, divisor) {
+    const min = 1 << 31
+    if (dividend === divisor) {
+        return 1
+    } else if (dividend === ~divisor + 1) {
+        return -1
+    }
+
+    let oldDividend = dividend
+    if (dividend === min) {
+        if (divisor === 1) {
+            return dividend
+        } else if (divisor === -1) {
+            return 0x7FFFFFFF
+        }
+
+        dividend += 1
+    }
+
+    if (divisor === 1) {
+        return dividend
+    } else if (divisor === -1) {
+        return ~dividend + 1
+    }
+
     let sign = 1
     if ((dividend > 0 && divisor < 0) || (dividend < 0 && divisor > 0)) {
         sign = -1
@@ -23,10 +47,18 @@ var divide = function(dividend, divisor) {
         while (dividend >= tmp) {
             dividend -= tmp
             count++
+
+            if (tmp >= (1 << 30)) {
+                break
+            }
             tmp = tmp << 1
         }
 
         result += ~(~0 << count)
+    }
+
+    if (oldDividend === min && dividend + 1 >= divisor) {
+        result += 1
     }
 
     if (sign === -1) {
