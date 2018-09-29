@@ -4,10 +4,10 @@
   "description": "leetcode exercise",
   "main": "index.js",
   "dependencies": {
-    "tape": "^4.2.0"
+    "tape": "*"
   },
   "devDependencies": {
-    "tap-spec": "^4.1.1"
+    "tap-spec": "*"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
