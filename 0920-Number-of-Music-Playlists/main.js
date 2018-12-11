@@ -1,5 +1,5 @@
+let mod = 10 ** 9 + 7;
 var numMusicPlaylists = function(N, L, K) {
-    let mod = 10 ** 9 + 7;
 
     let store = {};
 
@@ -27,8 +27,14 @@ var numMusicPlaylists = function(N, L, K) {
 };
 
 const factorial = function(n) {
-    return n <= 1 ? 1 : n * factorial(n - 1);
+    let res = n <= 1 ? 1 : n * factorial(n - 1);
+    return res % mod;
 };
+
+console.log(factorial(1));
+console.log(factorial(2));
+console.log(factorial(3));
+console.log(factorial(4));
 
 const createKey = function(n, l) {
     return n.toString() + '-' + l.toString();
