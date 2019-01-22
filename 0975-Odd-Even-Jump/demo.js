@@ -12,8 +12,6 @@ let res = a.map((ele, i) => {
 let stack = [];
 let higher = {};
 
-console.log('half', res);
-
 for (let i = res.length - 1; i >= 0; i--) {
     let item = res[i];
 
@@ -32,6 +30,4 @@ for (let i = res.length - 1; i >= 0; i--) {
         stack.push(item);
     }
 }
-
-console.log('111', res, higher);
 
